@@ -140,11 +140,9 @@ def mcm(num1, num2):
     for x in b:                     #Per cada valor de B en la posició x
         B.append(x)                 #Guardem el valor en una llista
 
-    while len(lista)>0:             #Iniciem un bucle per fer la comparació
-        lista.pop()                 #Eliminem el valor que em posat a la llista per fer el bucle un cop
-        for x in A:                 #Per cada valor dins de la llista A
-            if x in B:              #Si aquest valor també està a la llista B
-                B.remove(x)         #Eliminem els valors de b que es repeteixen en A
+    for x in A:                     #Per cada valor dins de la llista A
+        if x in B:                  #Si aquest valor també està a la llista B
+            B.remove(x)             #Eliminem els valors de b que es repeteixen en A
         A = A + B                   #Sumem les dos llistes (no es sumen els valors només s'afegeixen a la llista)
     mcm = 1                         #Creem una variable per el resultat final
     for x in A:                     #Per cada valor dins de la llista A
