@@ -117,7 +117,7 @@ def descompon(numero):
     """
   
     llista = list()
-    for prova in primos(numero):
+    for prova in primos(numero):            #Mentre el valor prova damb tots els valors primers dens del rang establert (range(2, numero))
         while numero % prova == 0:          
             llista.append(prova)            
             numero = numero // prova        
@@ -129,8 +129,6 @@ def mcm(num1, num2):
     Devuelve el mínimo común múltiplo de sus argumentos.
     """
     
-    lista=list()                    #Es crea una llista
-    lista.append(num2)              #S'incorpora un valor qualsevol
     a = descompon(num1)             #S'obtenen els valors de a amb la funció descompon
     b = descompon(num2)             #S'obtenen els valors de b amb la funció descompon
     A = list()                      #Creem una llista
@@ -140,10 +138,10 @@ def mcm(num1, num2):
     for x in b:                     #Per cada valor de B en la posició x
         B.append(x)                 #Guardem el valor en una llista
 
-    for x in A:                     #Per cada valor dins de la llista A
-        if x in B:                  #Si aquest valor també està a la llista B
-            B.remove(x)             #Eliminem els valors de b que es repeteixen en A
-        A = A + B                   #Sumem les dos llistes (no es sumen els valors només s'afegeixen a la llista)
+    for x in A:                 #Per cada valor dins de la llista A
+        if x in B:              #Si aquest valor també està a la llista B
+            B.remove(x)         #Eliminem els valors de b que es repeteixen en A
+    A = A + B                   #Sumem les dos llistes (no es sumen els valors només s'afegeixen a la llista)
     mcm = 1                         #Creem una variable per el resultat final
     for x in A:                     #Per cada valor dins de la llista A
         mcm = mcm * x               #Multipliquem tots els valors que hi ha dins de la llista
@@ -153,9 +151,7 @@ def mcd(num1, num2):
     """
     Devuelve el máximo común divisor de sus argumentos.
     """
-    
-    lista = list()                  #Es crea una llista
-    lista.append(num2)              #S'incorpora un valor qualsevol
+
     a = descompon(num1)             #S'obtenen els valors de a amb la funció descompon
     b = descompon(num2)             #S'obtenen els valors de b amb la funció descompon
     A = list()                      #Creem una llista
