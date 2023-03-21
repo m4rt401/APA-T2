@@ -21,6 +21,12 @@ Exemples:
 
 >>> mcd(924, 780)
 12
+
+>>> mcmN(42, 60, 70, 63)
+1260
+
+>>> mcdN(840, 630, 1050, 1470)
+210
 """
 
 def esPrimo(numero):
@@ -88,6 +94,54 @@ def mcd(num1, num2):
         mcd = mcd * x               #Multipliquem tots els valors que hi ha dins de la llista
 
     return mcd                      #Valor final
+
+def mcmN(*numeros):
+    """
+    Devuelve el mínimo común múltiplo de sus argumentos.
+    """
+    a = list(numeros)   
+    b = []
+    for x in a:
+        b.append(descompon(x))
+    l = len(b)
+    A = list(b[0])
+    i = 1
+    while i < l:
+        B = list(b[i])
+        for x in A:                     
+            if x in B:                  
+                B.remove(x)             
+        A = A + B  
+        i += 1            
+    mcm = 1                         
+    for x in A:                     
+        mcm = mcm * x               
+    return mcm                      
+
+def mcdN(*numeros):
+    """
+    Devuelve el máximo común divisor de sus argumentos.
+    """
+    lista = list(numeros)
+    num1 = int(lista.pop())
+    a = descompon(num1)
+    c = list()
+    while len(lista) > 0:
+        num2 = int(lista.pop())
+        b = list(descompon(num2))
+
+        for x in a:
+            if x in b:
+                b.remove(x)
+                c.append(x)
+        a = c
+        c = list()
+
+    mcdN=1
+    for x in a:
+        mcdN=mcdN*x
+
+    return mcdN
 
  
 import doctest

@@ -69,7 +69,7 @@ comprobarse las siguientes condiciones:
 Inserte a continuación una captura de pantalla que muestre el resultado de ejecutar el fichero `primos.py` con la opción
 *verbosa*, de manera que se muestre el resultado de la ejecución de los tests unitarios.
 
-<img src="Prova_Comp.PNG" width="480" align="center">
+<img src="Captura.PNG" width="480" align="center">
 
 #### Código desarrollado
 
@@ -100,6 +100,12 @@ Exemples:
 
 >>> mcd(924, 780)
 12
+
+>>> mcmN(42, 60, 70, 63)
+1260
+
+>>> mcdN(840, 630, 1050, 1470)
+210
 """
 
 def esPrimo(numero):
@@ -139,19 +145,12 @@ def mcm(num1, num2):
     Devuelve el mínimo común múltiplo de sus argumentos.
     """
     
-    a = descompon(num1)             #S'obtenen els valors de a amb la funció descompon
-    b = descompon(num2)             #S'obtenen els valors de b amb la funció descompon
-    A = list()                      #Creem una llista
-    B = list()                      #Creem una llista
-    for x in a:                     #Per cada valor de A en la posició x
-        A.append(x)                 #Guardem el valor en una llista
-    for x in b:                     #Per cada valor de B en la posició x
-        B.append(x)                 #Guardem el valor en una llista
-
-    for x in A:                 #Per cada valor dins de la llista A
-        if x in B:              #Si aquest valor també està a la llista B
-            B.remove(x)         #Eliminem els valors de b que es repeteixen en A
-    A = A + B                   #Sumem les dos llistes (no es sumen els valors només s'afegeixen a la llista)
+    A = list(descompon(num1))             #S'obtenen els valors de a amb la funció descompon
+    B = list(descompon(num2))             #S'obtenen els valors de b amb la funció descompon
+    for x in A:                     #Per cada valor dins de la llista A
+        if x in B:                  #Si aquest valor també està a la llista B
+            B.remove(x)             #Eliminem els valors de b que es repeteixen en A
+    A = A + B                       #Sumem les dos llistes (no es sumen els valors només s'afegeixen a la llista)
     mcm = 1                         #Creem una variable per el resultat final
     for x in A:                     #Per cada valor dins de la llista A
         mcm = mcm * x               #Multipliquem tots els valors que hi ha dins de la llista
@@ -162,15 +161,8 @@ def mcd(num1, num2):
     Devuelve el máximo común divisor de sus argumentos.
     """
 
-    a = descompon(num1)             #S'obtenen els valors de a amb la funció descompon
-    b = descompon(num2)             #S'obtenen els valors de b amb la funció descompon
-    A = list()                      #Creem una llista
-    B = list()                      #Creem una llista
-    for x in a:                     #Per cada valor de A en la posició x
-        A.append(x)                 #Guardem el valor en una llista
-    for x in b:                     #Per cada valor de B en la posició x
-        B.append(x)                 #Guardem el valor en una llista
-
+    A = list(descompon(num1))             #S'obtenen els valors de a amb la funció descompon
+    B = list(descompon(num2))             #S'obtenen els valors de b amb la funció descompon
     aux = list()                    #Creem una llista nova per poder guardar valors després
     for x in A:                     #Per cada valor de x dins de la llista A
         if x in B:                  #Si aquest valor també està a la llista B
@@ -182,7 +174,54 @@ def mcd(num1, num2):
 
     return mcd                      #Valor final
 
- 
+def mcmN(*numeros):
+    """
+    Devuelve el mínimo común múltiplo de sus argumentos.
+    """
+    a = list(numeros)   
+    b = []
+    for x in a:
+        b.append(descompon(x))
+    l = len(b)
+    A = list(b[0])
+    i = 1
+    while i < l:
+        B = list(b[i])
+        for x in A:                     
+            if x in B:                  
+                B.remove(x)             
+        A = A + B  
+        i += 1            
+    mcm = 1                         
+    for x in A:                     
+        mcm = mcm * x               
+    return mcm                      
+
+def mcdN(*numeros):
+    """
+    Devuelve el máximo común divisor de sus argumentos.
+    """
+    lista = list(numeros)
+    num1 = int(lista.pop())
+    a = descompon(num1)
+    c = list()
+    while len(lista) > 0:
+        num2 = int(lista.pop())
+        b = list(descompon(num2))
+
+        for x in a:
+            if x in b:
+                b.remove(x)
+                c.append(x)
+        a = c
+        c = list()
+
+    mcdN=1
+    for x in a:
+        mcdN=mcdN*x
+
+    return mcdN
+
 import doctest
 doctest.testmod()
 ```
